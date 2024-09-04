@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f0f0f0;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+        }
+        .left-side {
+            flex: 0 0 30%; /* Estreitado a área de credenciais */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-color: white;
+            border-right: 1px solid #ddd; /* Borda fina entre as áreas */
+        }
+        .logo {
+            max-width: 300px; /* Aumentado o tamanho da logo */
+            margin-bottom: 20px;
+        }
+        .login-form {
+            width: 100%;
+            max-width: 350px; /* Aumentado o tamanho do formulário */
+        }
+        .login-form input {
+            width: calc(100% - 22px); /* Ajustado para compensar o padding */
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .login-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+        }
+        .right-side {
+            flex: 1; /* Expande a área de fotos */
+            position: relative;
+            overflow: hidden;
+            background: #000; /* Cor de fundo para o slideshow */
+        }
+        .slideshow-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .mySlides {
+            display: none;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-side">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+            <form class="login-form" method="post">
+                <input type="text" name="username" placeholder="Usuário" required>
+                <input type="password" name="password" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+        <div class="right-side">
+            <div class="slideshow-container">
+                <img src="{{ url_for('static', filename='images/imagem1.jpg') }}" class="mySlides" alt="Imagem 1">
+                <img src="{{ url_for('static', filename='images/imagem2.jpg') }}" class="mySlides" alt="Imagem 2">
+                <img src="{{ url_for('static', filename='images/imagem3.jpg') }}" class="mySlides" alt="Imagem 3">
+                <!-- Adicione mais imagens conforme necessário -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let slides = document.getElementsByClassName("mySlides");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex-1].style.display = "block";  
+            setTimeout(showSlides, 5000); // Muda a imagem a cada 5 segundos
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+/* Estilos gerais do corpo */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Impede rolagem horizontal quando a barra lateral está aberta */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Garante que o corpo ocupe pelo menos a altura total da visualização */
+}
+
+/* Cabeçalho */
+header {
+    background-color: #003d7d; /* Azul mais frio para o cabeçalho */
+    color: white;
+    padding: 20px; /* Aumenta o padding para aumentar a altura do cabeçalho */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Ajusta o alinhamento dos itens no cabeçalho */
+    z-index: 100; /* Garante que o cabeçalho fique acima da barra lateral */
+}
+
+/* Conteúdo do cabeçalho */
+.header-content {
+    display: flex;
+    align-items: center;
+    width: 100%; /* Faz o conteúdo do cabeçalho ocupar toda a largura */
+    position: relative; /* Necessário para o posicionamento absoluto do menu de perfil */
+}
+
+/* Foto do perfil */
+#profile-pic {
+    width: 50px; /* Ajusta o tamanho da foto do perfil */
+    height: 50px; /* Ajusta o tamanho da foto do perfil */
+    border-radius: 50%; /* Faz a foto ser redonda */
+    cursor: pointer;
+    position: absolute;
+    right: 20px; /* Ajusta o alinhamento da foto à direita com um pequeno espaçamento */
+    top: 50%; /* Centraliza verticalmente a foto dentro do cabeçalho */
+    transform: translateY(-50%); /* Ajusta o alinhamento vertical da foto */
+}
+
+/* Menu de perfil */
+.profile-menu {
+    display: none; /* Inicialmente escondido */
+    position: absolute;
+    top: 70px; /* Ajusta para que o menu fique logo abaixo da foto do perfil */
+    right: 20px; /* Alinha o menu com a foto */
+    background-color: #003d7d; /* Cor de fundo do menu */
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    z-index: 300; /* Garante que fique acima do conteúdo */
+    min-width: 200px; /* Largura mínima do menu */
+}
+
+.profile-menu.open {
+    display: block; /* Mostra o menu quando aberto */
+}
+
+.profile-menu-button {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    background: none;
+    text-align: left;
+    font-size: 16px;
+}
+
+.profile-menu-button:hover {
+    background-color: #002a5b; /* Cor ao passar o mouse */
+}
+
+/* Botão de menu da barra lateral */
+.sidebar-toggle {
+    background: #002a5b; /* Azul mais escuro para o botão de menu */
+    border: none;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    position: absolute;
+    left: 10px; /* Alinha o botão à esquerda com um pequeno espaçamento */
+}
+
+/* Barra lateral */
+aside {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: -250px; /* Começa fora da tela */
+    background-color: #003d7d; /* Azul mais frio para a barra lateral */
+    color: white;
+    transition: left 0.3s;
+    overflow-x: hidden;
+    padding-top: 60px;
+    z-index: 200; /* Garante que a barra lateral fique acima do cabeçalho e do conteúdo */
+}
+
+/* Conteúdo da barra lateral */
+.sidebar-content {
+    padding: 10px;
+}
+
+/* Botão de fechar da barra lateral */
+.closebtn {
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+}
+
+/* Links da barra lateral */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar ul li a {
+    color: white; /* Cor do texto dos links */
+    text-decoration: none;
+}
+
+/* Botões na barra lateral */
+aside button,
+aside a {
+    color: white; /* Cor do texto dos botões */
+    background-color: transparent; /* Fundo transparente para botões */
+    border: none; /* Remove bordas padrão */
+    padding: 10px;
+    cursor: pointer;
+    display: block;
+    text-align: left; /* Alinha o texto à esquerda */
+    width: 100%; /* Faz com que o botão ocupe toda a largura da barra lateral */
+    font-size: 16px; /* Ajusta o tamanho da fonte conforme necessário */
+}
+
+/* Botões com fundo colorido na barra lateral */
+aside button:hover,
+aside a:hover {
+    background-color: #002a5b; /* Cor de fundo ao passar o mouse */
+}
+
+/* Estilo do conteúdo principal */
+main {
+    padding: 20px;
+    transition: margin-left 0.3s; /* Transição suave para o conteúdo principal */
+    flex: 1; /* Permite que o conteúdo principal ocupe o espaço disponível */
+}
+
+/* Estilo do rodapé */
+footer {
+    background-color: #003d7d; /* Azul mais frio para o rodapé */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto; /* Garante que o rodapé fique no final da página */
+}
+
+/* Quando a barra lateral está aberta */
+aside.open {
+    left: 0;
+}
+
+/* Ajusta o conteúdo principal quando a barra lateral está aberta */
+main.shifted {
+    margin-left: 250px; /* Adiciona margem para o conteúdo não ser coberto pela barra lateral */
+}
+
+/* Estilo da frase centralizada */
+.header-content h1 {
+    margin: 0;
+    font-size: 20px;
+    flex-grow: 1; /* Permite que o texto ocupe o espaço disponível */
+    text-align: center;
+}
+
+/* Estilo do popup */
+.popup {
+    display: none; /* Inicialmente escondido */
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+    justify-content: center;
+    align-items: center;
+    z-index: 400; /* Acima do menu e do conteúdo */
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    max-width: 80%;
+    text-align: center;
+    position: relative;
+}
+
+.close-popup {
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}

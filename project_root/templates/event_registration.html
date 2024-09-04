@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Eventos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Estilos para a lista de eventos e os botões */
+        #events-list {
+            margin: 20px;
+        }
+
+        #add-event-btn,
+        #back-btn {
+            position: fixed;
+            padding: 10px 20px;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #007bff; /* Cor padrão */
+        }
+
+        #add-event-btn {
+            bottom: 20px;
+            right: 20px;
+        }
+
+        #back-btn {
+            bottom: 20px;
+            left: 20px;
+            background-color: #007bff; /* Mesma cor do botão de cadastrar evento */
+        }
+
+        #add-event-btn:hover,
+        #back-btn:hover {
+            background-color: #0056b3; /* Cor ao passar o mouse */
+        }
+
+        /* Estilos para o popup de cadastro de evento */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Cadastro de Eventos</h1>
+    </header>
+
+    <main>
+        <div id="events-list">
+            <h2>Eventos Cadastrados</h2>
+            <ul>
+                {% for event in events %}
+                    <li>{{ event.title }} - {{ event.start_date }} - {{ event.description }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <button id="back-btn" onclick="window.location.href='{{ url_for('index') }}'">Voltar</button>
+        <button id="add-event-btn" onclick="openEventPopup()">Cadastrar Evento</button>
+    </main>
+
+    <!-- Popup de cadastro de evento -->
+    <div id="add-event-popup" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEventPopup()">&times;</span>
+            <h2>Cadastrar Novo Evento</h2>
+            <form id="event-form" method="POST" action="{{ url_for('event_registration') }}">
+                <label for="title">Título:</label>
+                <input type="text" id="title" name="title" required><br><br>
+                <label for="start_date">Data de Início:</label>
+                <input type="date" id="start_date" name="start_date" required><br><br>
+                <label for="end_date">Data de Término:</label>
+                <input type="date" id="end_date" name="end_date"><br><br>
+                <label for="description">Descrição:</label>
+                <textarea id="description" name="description"></textarea><br><br>
+                <button type="submit">Cadastrar Evento</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        function openEventPopup() {
+            document.getElementById('add-event-popup').style.display = 'block';
+        }
+
+        function closeEventPopup() {
+            document.getElementById('add-event-popup').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target.matches('.modal')) {
+                closeEventPopup();
+            }
+        }
+    </script>
+</body>
+</html>
